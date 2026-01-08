@@ -1,0 +1,5 @@
+{
+  "name": "Bunny Bakes",
+  "description": "您的智能烘焙伴侣，可根据食材生成定制食谱，创建视觉预览，并回答烘焙问题。",
+  "requestFramePermissions": []
+}
