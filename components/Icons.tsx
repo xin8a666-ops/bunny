@@ -1,4 +1,3 @@
-import React from 'react';
 
 // Custom Bunny Logo Image
 export const IconBunnyLogo = ({ className }: { className?: string }) => {
