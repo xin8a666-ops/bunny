@@ -3,9 +3,8 @@ import { Recipe, ChatMessage } from "../types";
 
 // Initialize Gemini Client
 // CRITICAL: Using named parameter as per guidelines
-// Add fallback to empty string to prevent crash if process.env.API_KEY is undefined during initialization
-const apiKey = process.env.API_KEY || "";
-const ai = new GoogleGenAI({ apiKey });
+// The API key must be obtained exclusively from process.env.API_KEY.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 // Recipe Schema Definition (Reused)
 const recipeSchema = {
@@ -51,7 +50,7 @@ export const generateRecipe = async (
   prompt: string,
   dietaryRestrictions: string
 ): Promise<Recipe> => {
-  if (!apiKey) throw new Error("API Key is missing. Please check your configuration.");
+  if (!process.env.API_KEY) throw new Error("API Key is missing.");
   
   const model = "gemini-3-flash-preview";
   
@@ -87,7 +86,7 @@ export const generateRecipeFromImage = async (
   base64Image: string,
   mimeType: string
 ): Promise<Recipe> => {
-  if (!apiKey) throw new Error("API Key is missing. Please check your configuration.");
+  if (!process.env.API_KEY) throw new Error("API Key is missing.");
 
   const model = "gemini-3-flash-preview"; // Multimodal model
 
@@ -138,7 +137,7 @@ export const generateRecipeImage = async (recipeTitle: string): Promise<string> 
   const safePrompt = encodeURIComponent(`${recipeTitle} bakery food delicious photography`);
   const fallbackUrl = `https://image.pollinations.ai/prompt/${safePrompt}?width=800&height=600&nologo=true&seed=${seed}&model=flux`;
 
-  if (!apiKey) {
+  if (!process.env.API_KEY) {
       console.warn("API Key missing, using fallback image.");
       return fallbackUrl;
   }
@@ -180,7 +179,7 @@ export const generateRecipeImage = async (recipeTitle: string): Promise<string> 
  * Chat with the AI Baking Assistant.
  */
 export const chatWithChef = async (history: ChatMessage[], newMessage: string): Promise<string> => {
-    if (!apiKey) return "请先配置 API Key 哦！(🐰💦)";
+    if (!process.env.API_KEY) return "请先配置 API Key 哦！(🐰💦)";
 
     const model = "gemini-3-flash-preview";
     
