@@ -147,8 +147,9 @@ export const generateRecipeImage = async (recipeTitle: string): Promise<string> 
       }
     });
 
-    if (response.candidates && response.candidates[0].content.parts) {
-        for (const part of response.candidates[0].content.parts) {
+    const candidate = response.candidates?.[0];
+    if (candidate?.content?.parts) {
+        for (const part of candidate.content.parts) {
             if (part.inlineData) {
                 return `data:image/png;base64,${part.inlineData.data}`;
             }

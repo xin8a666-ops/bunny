@@ -16,7 +16,6 @@ import {
   IconArrowLeft,
   IconPlus,
   IconCamera,
-  IconImage,
   IconBook,
   IconBunnyLogo,
   IconCommunity,
